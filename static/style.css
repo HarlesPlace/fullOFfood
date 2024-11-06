@@ -3,7 +3,6 @@
     src: url(../static/cheesefoodies.ttf);
  }
 
-
 :root{
     font-size: 16px;
 }
@@ -13,10 +12,11 @@ body{
 }
 
 main{
-    padding-top: 100px;
-    width: 100%;
+    padding-top: 200px;
+    width: 80%;
     margin: 0 auto;
     flex: 1;
+    text-align: justify;
 }
 
 header{
@@ -52,6 +52,10 @@ footer{
     clear: both;
     display: block;
     font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    color: red;
+    font-family: personalizado;
 }
 
 footer span{
@@ -59,12 +63,102 @@ footer span{
 }
 
 .logoIMG{
+    width: 100%;
+}
+
+.logo img{
     max-width: 90px;
 }
 
 .logo{
+    flex-grow: 1;
+    flex-basis: 100px;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 20px;
+    flex-grow: 1;
+}
+
+.logo-title{
+    vertical-align: middle;
     font-family: personalizado;
     font-size: 2rem;
-    text-decoration: none;
     color: red;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
+    margin-top: 0px;
+}
+
+nav{
+    display: flex; 
+    margin: auto;    
+    min-height: 92px;
+    flex-grow: 3;
+    flex-basis: 100px;
+    display: inline-block;
+    justify-content: center; 
+    align-items: center;
+}
+
+.navbar{
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    flex-wrap: wrap;
+    padding: 0;
+    width: 50%;
+    float: right;
+}
+
+.nav-item{
+    padding: 10px;
+    flex-direction: row;
+    list-style: none;
+    transition: 0.8s;
+    border-radius: 5px;
+    margin: 3px;
+    border: #fff solid 1px;
+}
+
+.nav-item a{
+    vertical-align: middle;
+    height: 100%;
+    color: red;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    transition: 0.8s;
+    text-decoration: none;
+    font-family: personalizado;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.8);
+}
+
+.nav-item:hover{
+    background-color: red;
+    border: yellow solid 1px;
+}
+
+.nav-item:hover a{
+    color: #000;
+    text-shadow: 2px 2px rgba(255, 255, 0, 0.8);
+}
+
+.cabecalho{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between; 
+    flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 300px){
+    .cabecalho{
+        flex-direction: column;
+        justify-content: center; 
+    }
+    .navbar{
+        float: none;
+        width: 100%;
+    }
 }

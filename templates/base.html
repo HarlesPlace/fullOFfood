@@ -20,12 +20,18 @@
         <section class="contatoHeader">
             <p><span>&#128231;</span> nicolas_cruz@usp.br</p>
         </section>
-        <a class="logo" href="{% url 'index' %}"> <img src="{% static 'logo.png' %}" class="logoIMG"> Full of Food </a>
-        <nav>
-            <ul>
-                <li><a href="{% url 'about' %}">Sobre</a></li>
-            </ul>
-        </nav>
+        <section class="cabecalho">
+            <a class="logo" href="{% url 'index' %}"> 
+                <img src="{% static 'logo.png' %}" class="logoIMG"> 
+                <h1 class="logo-title">Full of Food</h1>
+            </a>
+            <nav class="nav">
+                <ul class="navbar">
+                    <li class="nav-item"><a href="{% url 'about' %}">COMIDAS</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}">SOBRE</a></li>
+                </ul>
+            </nav>
+        </section>
     </header>
     <main>
         {% block content %}
