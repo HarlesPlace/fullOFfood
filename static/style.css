@@ -1,0 +1,70 @@
+@font-face {
+    font-family: personalizado;
+    src: url(../static/cheesefoodies.ttf);
+ }
+
+
+:root{
+    font-size: 16px;
+}
+
+body{
+    margin:0;  
+}
+
+main{
+    padding-top: 100px;
+    width: 100%;
+    margin: 0 auto;
+    flex: 1;
+}
+
+header{
+    width: 100%;
+    margin: 0 auto;
+}
+ 
+.contatoHeader{
+    background-color: #111f0e;
+    color: rgb(185, 183, 183);
+    width: 100%;
+    vertical-align: middle;
+    min-height: 20px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.contatoHeader p{
+    margin: 0;
+    min-height: 20px;
+    font-size: 0.75rem;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+footer{
+    clear: both;
+    display: block;
+    font-size: 1.2rem;
+}
+
+footer span{
+    font-size: 1.4rem;
+}
+
+.logoIMG{
+    max-width: 90px;
+}
+
+.logo{
+    font-family: personalizado;
+    font-size: 2rem;
+    text-decoration: none;
+    color: red;
+}

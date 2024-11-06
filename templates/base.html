@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Nicolas Sobral Cruz">
+	<meta name="description" content="Trabalho apresentado a disciplina de Sistemas de Informação da Escola Politécnica da Universidade de São Paulo">
+	<meta name="keywords" content="">
+	<meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> 
+    <!-- Favicon -->
+	<link rel="shortcut icon" href="{% static 'favicon.png' %}">
+    <title>{% block title %}{% endblock %} | Full of Food</title>
+</head>
+<body>
+    <header class="fixed-top">
+        <section class="contatoHeader">
+            <p><span>&#128231;</span> nicolas_cruz@usp.br</p>
+        </section>
+        <a class="logo" href="{% url 'index' %}"> <img src="{% static 'logo.png' %}" class="logoIMG"> Full of Food </a>
+        <nav>
+            <ul>
+                <li><a href="{% url 'about' %}">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <footer>
+        <p><span>&copy;</span> 2024 - Nicolas Sobral Cruz</p>
+    </footer>
+</body>
+</html>
