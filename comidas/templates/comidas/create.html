@@ -3,18 +3,7 @@
 <h2>Inserir Novo Post</h2>
 <form method="POST" action="{% url 'comidas:create' %}">
   {% csrf_token %}
-  <p>
-    <label for="id_titulo">Título:</label>
-    <input type="text" name="titulo" id="id_titulo" />
-  </p>
-  <p>
-    <label for="id_data">Data:</label>
-    <input type="datetime" name="data" id="id_data" />
-  </p>
-  <p>
-    <label for="id_conteudo">Conteudo:</label>
-    <input type="text" name="conteudo" id="id_conteudo" />
-  </p>
+  {{form.as_p}}
   <button type="submit">Criar</button>
 </form>
 {% endblock content %}

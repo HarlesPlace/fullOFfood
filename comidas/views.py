@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from .forms import PostForm
 
 def list_post(request):
     post_list=Post.objects.all()
@@ -23,26 +24,38 @@ def search_post(request):
 
 def create_post(request):
     if request.method == 'POST':
-        post_titulo = request.POST['titulo']
-        post_conteudo = request.POST['conteudo']
-        post_data = request.POST['data']
-        post = Post(titulo=post_titulo, conteudo=post_conteudo,data=post_data)
-        post.save()
-        return HttpResponseRedirect(
-            reverse('comidas:detail', args=(post.id, )))
+        form=PostForm(request.POST)
+        if form.is_valid():
+            post_titulo = request.POST['titulo']
+            post_conteudo = request.POST['conteudo']
+            post_data = request.POST['data']
+            post = Post(titulo=post_titulo, conteudo=post_conteudo,data=post_data)
+            post.save()
+            return HttpResponseRedirect(reverse('comidas:detail', args=(post.id, )))
     else:
-        return render(request, 'comidas/create.html', {})
+        form=PostForm()
+    context={'form':form}
+    return render(request, 'comidas/create.html', context)
     
 def update_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
-        post.titulo = request.POST['titulo']
-        post.conteudo = request.POST['conteudo']
-        post.data = request.POST['data']
-        post.save()
-        return HttpResponseRedirect(
-            reverse('comidas:detail', args=(post.id, )))
-    context = {'post': post}
+        form=PostForm(request.POST)
+        if form.is_valid():
+            post.titulo = request.POST['titulo']
+            post.conteudo = request.POST['conteudo']
+            post.data = request.POST['data']
+            post.save()
+            return HttpResponseRedirect(reverse('comidas:detail', args=(post.id, )))
+    else:
+        form=PostForm(
+            initial={
+                'titulo': post.titulo,
+                'data':post.data,
+                'conteudo': post.conteudo
+            }
+        )
+    context = {'post': post, 'form':form}
     return render(request, 'comidas/update.html', context)
 
 def delete_post(request, post_id):
