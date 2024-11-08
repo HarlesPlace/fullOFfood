@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h2>Todos os Posts</h2>
+
+<section>
+  <p>
+    Muitos resultados? <a href="{% url 'comidas:search' %}">Buscar Post</a>
+  </p>
+  <p>
+    Não encontrou o post?
+    <a href="{% url 'comidas:create' %}">Adicionar Novo Post</a>
+  </p>
+</section>
+
+{% if post_list %}
+<section>
+  {% for post in post_list %}
+  <article>
+    <a href="{% url 'comidas:detail' post.id %}"
+      ><img src="" alt="Poster do post {{ post.titulo}}"
+    /></a>
+    <p>{{ post.titulo }} ({{ post.data }})</p>
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhum post.</p>
+{% endif %} 
+{% endblock content %}

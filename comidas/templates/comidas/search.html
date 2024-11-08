@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<h2>Busca de post por Nome</h2>
+<form action="{% url 'comidas:search' %}">
+    <p>
+        <label for="id_query">Título:</label>
+        <input type="text" name="query" id="id_query" />
+    </p>
+    <button type="submit">Buscar</button>
+</form>
+
+<h2>Posts Filtrados</h2>
+{% if post_list %}
+<section>
+  {% for post in post_list %}
+  <article>
+    <a href="{% url 'comidas:detail' post.id %}">
+        <img src="" alt="Poster do post {{ post.titulo}}"/>
+    </a>
+    <p>{{ post.titulo }} ({{ post.data }})</p>
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhum post.</p>
+{% endif %} 
+{% endblock content %}

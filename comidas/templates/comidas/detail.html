@@ -1,0 +1,19 @@
+{% extends 'base.html' %} 
+
+{% block title %} 
+{{ post.titulo }} ({{ post.data }})
+{% endblock title %} 
+
+{% block content %}
+    <h2>Detalhes do Post {{ post.titulo }} ({{ post.data }})</h2>
+    <section >
+      <ul>
+        <li>Post: {{ post.titulo }}</li>
+        <li>Postado em: {{ post.data }}</li>
+        <li><a href="{% url 'comidas:update' post.id %}">Editar </a></li>
+        <li><a href="{% url 'comidas:delete' post.id %}">Apagar </a></li>
+      </ul>
+      {{ post.conteudo }}
+    </section>
+    
+{% endblock content %}
