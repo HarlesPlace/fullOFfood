@@ -15,5 +15,26 @@
       </ul>
       {{ post.conteudo |safe }}
     </section>
-    
+    <hr>
+
+<section>
+    <header>
+        <h3>Comentários</h3>
+    </header>
+    <ul>
+        {% if post.comment_set.all %}
+            {% for comment in post.comment_set.all %}
+                <figure>
+                    <blockquote>
+                        "{{ comment.texto }}"
+                    </blockquote>
+                    <figcaption>—{{ comment.autor }}</figcaption>
+                </figure>
+            {% endfor %}
+        {% else %}
+            <p>Ainda não existe nenhuma comentário nesse post</p>
+        {% endif %}
+    </ul>
+</section>
+
 {% endblock content %}
