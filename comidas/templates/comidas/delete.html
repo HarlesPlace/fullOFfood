@@ -3,7 +3,7 @@
 <form action="{% url 'comidas:delete' post.id %}" method="post">
     {% csrf_token %}
     <p>
-      Você tem certeza que deseja apagar o post "{{ post.titulo }} ({{post.data}})"?
+      Você tem certeza que deseja apagar o post "{{ post.titulo }} ({{post.data|date:"D, d M Y"}})"?
     </p>
     <button type="submit">Apagar</button>
 </form>

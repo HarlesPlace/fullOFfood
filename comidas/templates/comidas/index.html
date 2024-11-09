@@ -19,7 +19,7 @@
     <a href="{% url 'comidas:detail' post.id %}"
       ><img src="" alt="Poster do post {{ post.titulo}}"
     /></a>
-    <p>{{ post.titulo }} ({{ post.data }})</p>
+    <p>{{ post.titulo }} ({{ post.data|date:"D, d M Y" }})</p>
   </article>
   {% endfor %}
 </section>

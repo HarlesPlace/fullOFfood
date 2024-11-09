@@ -3,16 +3,15 @@ from .models import Post
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .forms import PostForm
+from django.views import generic
 
-def list_post(request):
-    post_list=Post.objects.all()
-    context={'post_list': post_list}
-    return render(request, "comidas/index.html",context)
+class ListView(generic.ListView):
+    model=Post
+    template_name='comidas/index.html'
 
-def detail_post(request, post_id):
-    post = get_object_or_404(Post,pk=post_id)
-    context = {'post': post}
-    return render(request, 'comidas/detail.html', context)
+class DetailView(generic.DetailView):
+    model=Post
+    template_name='comidas/detail.html'
 
 def search_post(request):
     context = {}
@@ -22,41 +21,19 @@ def search_post(request):
         context = {"post_list": post_list}
     return render(request, 'comidas/search.html', context)
 
-def create_post(request):
-    if request.method == 'POST':
-        form=PostForm(request.POST)
-        if form.is_valid():
-            post_titulo = request.POST['titulo']
-            post_conteudo = request.POST['conteudo']
-            post_data = request.POST['data']
-            post = Post(titulo=post_titulo, conteudo=post_conteudo,data=post_data)
-            post.save()
-            return HttpResponseRedirect(reverse('comidas:detail', args=(post.id, )))
-    else:
-        form=PostForm()
-    context={'form':form}
-    return render(request, 'comidas/create.html', context)
-    
-def update_post(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    if request.method == 'POST':
-        form=PostForm(request.POST)
-        if form.is_valid():
-            post.titulo = request.POST['titulo']
-            post.conteudo = request.POST['conteudo']
-            post.data = request.POST['data']
-            post.save()
-            return HttpResponseRedirect(reverse('comidas:detail', args=(post.id, )))
-    else:
-        form=PostForm(
-            initial={
-                'titulo': post.titulo,
-                'data':post.data,
-                'conteudo': post.conteudo
-            }
-        )
-    context = {'post': post, 'form':form}
-    return render(request, 'comidas/update.html', context)
+class CreatView(generic.CreateView):
+    model= Post
+    template_name= 'comidas/create.html'
+    form_class=PostForm
+    def get_success_url(self):
+        return reverse('comidas:detail', args=[self.object.pk])
+
+class UpdateView(generic.UpdateView):
+    model= Post
+    template_name= 'comidas/update.html'
+    form_class=PostForm
+    def get_success_url(self):
+        return reverse('comidas:detail', args=[self.object.pk])
 
 def delete_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -65,3 +42,9 @@ def delete_post(request, post_id):
         return HttpResponseRedirect(reverse('comidas:index'))
     context = {'post': post}
     return render(request, 'comidas/delete.html', context)
+
+class DeleteView(generic.DeleteView):
+    model=Post
+    template_name='comidas/delete.html'
+    def get_success_url(self):
+        return reverse('comidas:index')
