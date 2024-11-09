@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Comentar Post {{ post.titulo }} ({{ post.data|date:"D, d M Y" }})</h2>
+
+<form action="{% url 'comidas:comment' post.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Comentar</button>
+</form>
+
+<p><a href="{% url 'comidas:detail' post.id %}">Voltar para a página do post</a></p>
+{% endblock content %}

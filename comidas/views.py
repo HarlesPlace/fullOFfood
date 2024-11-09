@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post, Comment
 from django.urls import reverse
-from django.http import HttpResponseRedirect
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.views import generic
 
 class ListView(generic.ListView):
@@ -35,16 +34,28 @@ class UpdateView(generic.UpdateView):
     def get_success_url(self):
         return reverse('comidas:detail', args=[self.object.pk])
 
-def delete_post(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    if request.method == "POST":
-        post.delete()
-        return HttpResponseRedirect(reverse('comidas:index'))
-    context = {'post': post}
-    return render(request, 'comidas/delete.html', context)
-
 class DeleteView(generic.DeleteView):
     model=Post
     template_name='comidas/delete.html'
     def get_success_url(self):
         return reverse('comidas:index')
+
+class CommentCreateView(generic.CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'comidas/comment.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post_id = self.kwargs['pk']
+        #post = Post.objects.get(pk=post_id) get_object_or_404(Post, pk=post_id)
+        post = get_object_or_404(Post, pk=post_id)
+        context['post'] = post
+        return context
+    def form_valid(self, form):
+        #post = Post.objects.get(pk=self.kwargs['pk'])
+        post = get_object_or_404(Post,pk=self.kwargs['pk'])
+        form.instance.post = post
+        return super().form_valid(form)
+    def get_success_url(self):
+        post_id = self.kwargs['pk']
+        return reverse('comidas:detail', args=[post_id])
