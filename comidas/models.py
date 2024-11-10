@@ -20,3 +20,10 @@ class Comment(models.Model):
         return f'{self.texto} - {self.autor.username}'
     class Meta:
         ordering = ['-data']
+
+class Category(models.Model):
+    nome=models.CharField(max_length=255)
+    descricao=models.CharField(max_length=1000)
+    post = models.ManyToManyField(Post)
+    def __str__(self):
+        return f'{self.nome} : {self.descricao}'
