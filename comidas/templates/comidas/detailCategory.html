@@ -17,20 +17,19 @@
     <header>
         <h3>Posts da catgoria</h3>
     </header>
-    <ul>
+    <section class="posts">
         {% if category.post.all %}
         {% for post in category.post.all %}
-        <article>
-            <a href="{% url 'comidas:detail' post.id %}"
-              ><img src="" alt="Poster do post {{ post.titulo}}"
-            /></a>
+        <article class="post-card">
+            <a href="{% url 'comidas:detail' post.id %}">
             <p>{{ post.titulo }} ({{ post.data|date:"D, d M Y" }})</p>
-          </article>
+            <img src="" alt="Poster do post {{ post.titulo}}"/>
+            </a>
+        </article>
         {% endfor %}
         {% else %}
             <p>Ainda não existe nenhum post nessa categoria</p>
         {% endif %}
-    </ul>
+    </section>
 </section>
-
 {% endblock content %}

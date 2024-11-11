@@ -146,6 +146,8 @@ nav{
     text-shadow: 2px 2px rgba(255, 255, 0, 0.8);
 }
 
+.categorias,
+.posts,
 .cabecalho{
     flex-direction: row;
     display: flex;
@@ -153,6 +155,28 @@ nav{
     flex-wrap: wrap;
 }
 
+.categoria-card,
+.post-card{
+    display: flex; 
+    margin: 10px;    
+    min-height: 92px;
+    flex-grow: 3;
+    flex-basis: 100px;
+    align-items: center;
+    background-color: red;
+    padding: 10px;
+    padding-top: 0;
+    border: yellow solid 1px;
+}
+.categoria-card a,
+.post-card a{
+    text-decoration: none;
+    color: #fff;
+}
+.categoria-card p,
+.post-card p{
+    margin-top: 0;
+}
 @media only screen and (max-width: 300px){
     .cabecalho{
         flex-direction: column;

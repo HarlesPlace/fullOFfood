@@ -11,15 +11,16 @@
     <a href="{% url 'comidas:create' %}">Adicionar Novo Post</a>
   </p>
 </section>
-
+<hr>
 {% if post_list %}
-<section>
+<section class="posts">
   {% for post in post_list %}
-  <article>
-    <a href="{% url 'comidas:detail' post.id %}"
-      ><img src="" alt="Poster do post {{ post.titulo}}"
-    /></a>
-    <p>{{ post.titulo }} ({{ post.data|date:"D, d M Y" }})</p>
+  <article class="post-card">
+    <a href="{% url 'comidas:detail' post.id %}">
+      
+      <p>{{ post.titulo }} ({{ post.data|date:"D, d M Y" }})</p>
+      <img src="" alt="Poster do post {{ post.titulo}}"/>
+    </a>
   </article>
   {% endfor %}
 </section>

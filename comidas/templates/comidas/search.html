@@ -12,13 +12,13 @@
 
 <h2>Posts Filtrados</h2>
 {% if post_list %}
-<section>
+<section class="posts">
   {% for post in post_list %}
-  <article>
+  <article class="post-card">
     <a href="{% url 'comidas:detail' post.id %}">
-        <img src="" alt="Poster do post {{ post.titulo}}"/>
+      <p>{{ post.titulo }} ({{ post.data|date:"D, d M Y" }})</p>
+      <img src="" alt="Poster do post {{ post.titulo}}"/>
     </a>
-    <p>{{ post.titulo }} ({{ post.data|date:"D, d M Y" }})</p>
   </article>
   {% endfor %}
 </section>

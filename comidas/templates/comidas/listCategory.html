@@ -3,9 +3,9 @@
 <h2>Todas categorias</h2>
 
 {% if category_list %}
-<section>
+<section class="categorias">
   {% for category in category_list %}
-  <article>
+  <article class="categoria-card">
     <a href="{% url 'comidas:categoryDetail' category.id %}">
         <h4>{{category.nome}}</h4>
         <p>{{category.descricao}}</p>
