@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+
+{% block title %} 
+{{ category.nome }} 
+{% endblock title %} 
+
+{% block content %}
+    
+    <section >
+        <h2>{{ category.nome }} </h2>
+        <p>{{ category.descricao }}</p>
+    </section>
+
+    <hr>
+
+<section>
+    <header>
+        <h3>Posts da catgoria</h3>
+    </header>
+    <ul>
+        {% if category.post.all %}
+        {% for post in category.post.all %}
+        <article>
+            <a href="{% url 'comidas:detail' post.id %}"
+              ><img src="" alt="Poster do post {{ post.titulo}}"
+            /></a>
+            <p>{{ post.titulo }} ({{ post.data|date:"D, d M Y" }})</p>
+          </article>
+        {% endfor %}
+        {% else %}
+            <p>Ainda não existe nenhum post nessa categoria</p>
+        {% endif %}
+    </ul>
+</section>
+
+{% endblock content %}

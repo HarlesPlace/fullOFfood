@@ -10,4 +10,6 @@ urlpatterns = [
     path('delete/<int:pk>/', views.DeleteView.as_view(), name='delete'),
     path('create/', views.CreatView.as_view(), name='create'),
     path('<int:pk>/comment/', views.CommentCreateView.as_view(), name='comment'),
+    path('category/', views.categoryListView.as_view(), name='categoryList'),
+    path('cetegory/<int:pk>/', views.categoryDetailView.as_view(), name='categoryDetail'),
 ]

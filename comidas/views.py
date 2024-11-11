@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from django.urls import reverse
 from .forms import PostForm, CommentForm
 from django.views import generic
@@ -47,15 +47,21 @@ class CommentCreateView(generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post_id = self.kwargs['pk']
-        #post = Post.objects.get(pk=post_id) get_object_or_404(Post, pk=post_id)
         post = get_object_or_404(Post, pk=post_id)
         context['post'] = post
         return context
     def form_valid(self, form):
-        #post = Post.objects.get(pk=self.kwargs['pk'])
         post = get_object_or_404(Post,pk=self.kwargs['pk'])
         form.instance.post = post
         return super().form_valid(form)
     def get_success_url(self):
         post_id = self.kwargs['pk']
         return reverse('comidas:detail', args=[post_id])
+    
+class categoryListView(generic.ListView):
+    model=Category
+    template_name='comidas/listCategory.html'
+
+class categoryDetailView(generic.DetailView):
+    model=Category
+    template_name='comidas/detailCategory.html'    

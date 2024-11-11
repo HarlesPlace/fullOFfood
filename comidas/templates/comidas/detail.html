@@ -6,6 +6,15 @@
 
 {% block content %}
     <h2>Detalhes do Post {{ post.titulo }} ({{ post.data|date:"D, d M Y" }})</h2>
+    <section>
+        <h4>Categorias do post:
+            {% if post.category_set.all %}
+               {% for category in post.category_set.all %}
+    {{ category.nome }}{% if not forloop.last %}, {% endif %}
+{% endfor %}
+            {% endif %}
+        </h4>
+    </section>
     <section >
       <ul>
         <li>Post: {{ post.titulo }}</li>
